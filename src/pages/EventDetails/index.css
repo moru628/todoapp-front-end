@@ -1,0 +1,93 @@
+*{
+    font-family: "Poppins", sans-serif;
+}
+
+.event-details-container{
+    background-color: #f0f0f0;
+    height: 100vh;
+}
+
+.top-event-details{
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.top-event-details img{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 30px;
+    left: 25px;
+}
+
+.top-event-details .title{
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.event-details-img{
+    width: 100%;
+    max-width: 333px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.each-event-image{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.details-content .box{
+    margin: 10px 45px 5px 45px;
+}
+
+.box .text{
+    color: #585858;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.box input{
+    width: 100%;
+    border:none;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    color: #989898;
+    font-size: 18px;
+    padding: 15px 20px 15px 20px;
+}
+
+.confirm-btn{
+   margin: 40px;
+   display: flex;
+   justify-content: flex-end; 
+}
+
+.confirm-btn button{
+    padding: 10px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-different-1{
+    background-color:#FFB639;
+}
+
+.confirm-different-2{
+    background-color:#3985FF;
+}
+
+.confirm-different-3{
+    background-color:#AE67FF;
+}

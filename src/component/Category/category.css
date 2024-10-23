@@ -1,0 +1,166 @@
+
+  .container-scroll{
+    padding: 0 0 0 30px;
+  }
+
+  .category-items{
+    padding-bottom: 20px;
+    display: flex;
+    overflow-x:auto ;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .item {
+    background-color: #53B1FD;
+    width: 100px;
+    border-radius: 20px;
+    position: relative;
+    flex: 0 0 auto;
+    margin-right: 20px;
+  }
+
+  .item-work{
+    background-color: #53B1FD;
+  }
+
+  .item-study{
+    background-color: #FD853A;
+  }
+
+  .item-pet {
+    background-color: #12B76A;
+  }
+
+  .item-family{
+    background-color:#F04438 ;
+  }
+
+  .item-play{
+    background-color:#EE46BC ;
+  }
+
+  .category-icon {
+    width: 40px;
+    height: auto;
+  }
+
+  .category-name {
+    color: white;
+    font-size: 15px;
+  }
+
+  .category-task {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+  .task-number {
+    color: white;
+    padding-left: 5px;
+    font-weight: 300;
+    font-size: 12px;
+  }
+
+  .arrow-icon {
+    width: 20px;
+    height: auto;
+  }
+
+  .plus{
+    position:absolute;
+    right: 15px;
+    bottom: 10px;
+  }
+
+  .plus-icon {
+    width: 25px;
+    height: auto;
+  }
+
+  .draft-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 20px 0 20px 0;
+  }
+
+  .info-content{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .title{
+    color: grey;
+  }
+
+  .simple-table {
+    border-collapse: collapse;
+  }
+  
+  .simple-table td {
+    border: 1px solid #dadada;
+    padding: 8px;
+    text-align: left;
+    color: grey;
+    position: relative; 
+  }
+
+  .priority{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .priority-name{
+    margin-right: 5px;
+  }
+
+  .priority-container{
+    position: relative;
+    z-index: 10; 
+  }
+
+  .drop-down{
+    position: absolute;
+    background-color: white;
+    top: 50px;
+    width: 250px;
+  }
+
+  li{
+    list-style-type: none;
+  }
+  
+  .status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .status-container{
+    position: relative;
+    z-index: 1; 
+  }
+
+  .drop-down-status{
+    position: relative;
+    background-color: white;
+    top: 50px;
+  }
+
+  .btn-task-submit{
+    padding: 10px;
+    border: none;
+    background-color: #FD853A;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 5px;
+  }
+
+  .btn-task-submit:hover{
+    background-color: #ffb78a;
+    cursor: pointer;
+  }

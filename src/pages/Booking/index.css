@@ -1,0 +1,58 @@
+.box span{
+    color: #FF0000;
+}
+
+.booking-btn{
+    margin: 40px;
+ }
+
+.booking-btn button{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.booking-different-1{
+    background-color:#FFB639;
+}
+
+.booking-different-2{
+    background-color:#3985FF;
+}
+
+.booking-different-3{
+    background-color:#AE67FF;
+}
+
+.time-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 10px 45px 5px 45px;
+  }
+  
+  .time-container div {
+    background-color: #FBFBFB;
+    border: 1px solid #a5a5a5;
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .time-1 div:hover {
+    background-color: #FFB639;
+  }
+  .time-2 div:hover {
+    background-color: #3985FF;
+  }
+
+  .time-3 div:hover {
+    background-color: #AE67FF;
+  }

@@ -1,0 +1,129 @@
+.login-container{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  font-family: "Poppins", sans-serif;
+}
+
+.title-login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  margin: 40px 72px 0px 72px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+.login{
+  color: rgb(109, 109, 109);
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.line-login{
+  padding: 0 0 0 5px;
+  font-size: 24px !important;
+}
+
+.login-form{
+  padding: 30px 50px 30px 50px;
+}
+
+.form-group-login{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.form-group-login input{
+  padding: 20px 30px 20px 30px;
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+}
+
+.form-group-login .email{
+  color: #367302;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.form-group-login .password{
+  color: #367302;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.policy{
+  font-size: 14px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.policy a{
+  color: #367302;
+  text-decoration: none;
+}
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #4BA50F;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #3d860c;
+  transform: scale(1.02);
+}
+
+.login-bottom{
+  padding: 0px 50px 0px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-way-1{
+  font-size: 14px;
+  color: #848484;
+}
+
+.google-icon{
+  width:40px;
+  height: 40px;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+
+
+.login-way-2{
+  font-size: 14px;
+  color: #848484;
+}
+
+.login-way-2 a{
+  font-size: 14px;
+  font-weight: 600;
+  color: #367302;
+  text-decoration: none;
+}
