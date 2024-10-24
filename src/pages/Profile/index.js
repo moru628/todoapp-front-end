@@ -233,7 +233,7 @@ useEffect(() => {
                       <div className='post-item box' key={index}>
                         <img src={`${url}/upload/${post.imageUrl}`} alt={`Post ${index + 1}`} className='post-img' />
                         <div className='post-cancel'  onClick={() => handleDeletePost(post._id)}>
-                          <img src='/assets/cancel.png' alt='' className='icon'/>
+                          <img src='/assets/Cancel.png' alt='' className='icon'/>
                         </div>
                       </div>
                   ))
