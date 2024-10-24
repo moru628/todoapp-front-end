@@ -44,6 +44,8 @@
 
     "react-swipeable": "^7.0.1",
 
+    "serve": "^14.2.4",
+
     "swiper": "^11.1.14",
 
     "web-vitals": "^2.1.4"
