@@ -24,10 +24,7 @@
   }
   
 .top-container{
-  background-image: url('../../assets/profile-background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; 
+    position: relative;
     padding-top: 20px;
     font-family: "Poppins", sans-serif;
     height: 33vh;
@@ -38,8 +35,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
+.background-image{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
 .settings-icon {
     position: absolute;
     top: 20px;

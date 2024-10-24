@@ -10,6 +10,8 @@ const InfoChange = ({ open, onClose, user, setUser, description, setDescription,
   const [selectedFile, setSelectedFile] = useState(null);
   const [newName, setNewName] = useState('')
 
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     if (open && user) {
       setNewDescription(description);
@@ -29,7 +31,7 @@ const InfoChange = ({ open, onClose, user, setUser, description, setDescription,
         name: newName
       }
 
-      const response = await axios.put(`http://localhost:5050/user/${userId}`, updateData);
+      const response = await axios.put(`${url}/user/${userId}`, updateData);
       
       setDescription(response.data.description);
       setUser(response.data);
@@ -40,9 +42,9 @@ const InfoChange = ({ open, onClose, user, setUser, description, setDescription,
         formData.append('profileImg', selectedFile);
         formData.append('description', newDescription); 
 
-        const uploadResponse = await axios.post(`http://localhost:5050/upload-image/${userId}`, formData);
+        const uploadResponse = await axios.post(`${url}/upload-image/${userId}`, formData);
 
-       const newProfileImg = `http://localhost:5050/upload/${uploadResponse.data.user.profileImg}`;
+       const newProfileImg = `${url}/upload/${uploadResponse.data.user.profileImg}`;
        setProfileImg(newProfileImg);
        localStorage.setItem('profileImg', newProfileImg);
       }

@@ -18,6 +18,7 @@ const TaskDialog = ({selectedCategory,handleClose }) => {
     const [selectedPriority, setSelectedPriority] = useState('Low')
     const [selectedStatus, setSelectedStatus] = useState('On track')
 
+    const url = process.env.REACT_APP_BACKEND_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -46,7 +47,7 @@ const TaskDialog = ({selectedCategory,handleClose }) => {
       userId
     }
     console.log("new task information", newTask)
-    axios.post('http://localhost:5050/task', newTask)
+    axios.post(`${url}/task`, newTask)
     .then( result => {
       console.log(result)
       handleClose()

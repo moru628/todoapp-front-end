@@ -8,6 +8,8 @@ const PostDialog = ({open, handleClose, onPostUpload}) => {
     const [selectedImage, setSelectedImage] = useState(null)
     const [title, setTitle] = useState('');
 
+    const url = process.env.REACT_APP_BACKEND_URL;
+
     // Trigger the file input click using useRef
     const handleUploadClick = () => {
         fileInputRef.current.click()
@@ -42,7 +44,7 @@ const PostDialog = ({open, handleClose, onPostUpload}) => {
       console.log('Form Data:', formData);
 
       try{
-        const response = await axios.post('http://localhost:5050/post', formData)
+        const response = await axios.post(`${url}/post`, formData)
         onPostUpload(response.data);
         handleClose();
         setTitle('');

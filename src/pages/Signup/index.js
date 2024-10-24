@@ -12,6 +12,8 @@ const Signup = () => {
     const [password, setPassword] = useState()
     const navigate = useNavigate()
 
+    const url = process.env.REACT_APP_BACKEND_URL;
+
     const handleSubmit = (e) => {
       e.preventDefault()
       const newUser = {
@@ -25,7 +27,7 @@ const Signup = () => {
       };
     
       console.log("New User Data:", newUser); 
-      axios.post('http://localhost:5050/register', newUser)
+      axios.post(`${url}/register`, newUser)
       .then( result => {console.log(result)
         navigate('/login')
       })

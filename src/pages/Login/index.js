@@ -11,9 +11,11 @@ const Login = () => {
   const [password, setPassword] = useState()
   const navigate = useNavigate()
 
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:5050/login', {email, password})
+    axios.post(`${url}/login`, {email, password})
     .then( result => {
       console.log(result)
       if(result.data.message === "success"){
@@ -65,7 +67,7 @@ const Login = () => {
           />
         </div>
         <div className="policy">
-          I understood the <a href="">terms & policy</a>.
+          I understood the <a href="/terms-and-policy">terms & policy</a>.
         </div>
         <div className="btn-container">
           <button type="submit" className="login-button">LOG IN</button>

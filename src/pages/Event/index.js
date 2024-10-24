@@ -8,6 +8,8 @@ const Event = () => {
   const [activities, setActivities] = useState([])
   const [heartIcon, setHeartIcon] = useState({})
 
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const savedHearts = JSON.parse(localStorage.getItem('heartIconStates')) || {};
     setHeartIcon(savedHearts);
@@ -34,7 +36,7 @@ const Event = () => {
     }
     if (newHeartIconState) {
       try {
-        const response = await axios.post('http://localhost:5050/user/event', {
+        const response = await axios.post(`${url}/user/event`, {
           userId, 
           eventImageUrl
         });
@@ -44,7 +46,7 @@ const Event = () => {
       }
     } else {
       try {
-        const response = await axios.delete('http://localhost:5050/user/event', {
+        const response = await axios.delete(`${url}/user/event`, {
           data: { userId, eventImageUrl }
         });
         console.log("event removed:", response.data);
@@ -57,14 +59,14 @@ const Event = () => {
   useEffect(() => {
     const fetchActivities = async() => {
       try {
-        const response = await axios.get('http://localhost:5050/event')
+        const response = await axios.get(`${url}/event`)
         setActivities(response.data)
       } catch(error){
         console.error("Error fetching activities:", error);
       }
     }
     fetchActivities()
-  },[])
+  },[url])
 
   return (
     <div className='event-container'>

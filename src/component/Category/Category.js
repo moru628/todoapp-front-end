@@ -7,12 +7,13 @@ import axios from 'axios'
 const Category = ({categories, userId}) => {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [taskCounts, setTaskCounts] = useState({});
+  const url = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchTaskCounts = async () => {
       if (!userId) return; 
       try {
-        const response = await axios.get(`http://localhost:5050/task/count?userId=${userId}`);
+        const response = await axios.get(`${url}/task/count?userId=${userId}`);
         console.log("Fetched task counts:", response.data);
         setTaskCounts(response.data.count);
       } catch (error) {
@@ -20,7 +21,7 @@ const Category = ({categories, userId}) => {
       }
     };
     fetchTaskCounts();
-  }, [userId]);
+  }, [userId, url]);
 
   const handleClick = (category) => {
     setSelectedCategory(selectedCategory === category ? null : category);
@@ -40,11 +41,11 @@ const Category = ({categories, userId}) => {
             <img src={`/assets/${category.name.toLowerCase()}.png`}alt='' className='category-icon' />
             <div className='category-name'>{category.name}</div>
             <div className='category-task'>
-              <img src='./assets/arrow.png' alt='' className='arrow-icon' />
+              <img src='/assets/arrow.png' alt='' className='arrow-icon' />
               <div className='task-number'>{taskCounts[category.name] || 0} Tasks</div>
             </div>
             <div className='plus'>
-              <img src='./assets/plus.png' alt='' className='plus-icon' />
+              <img src='/assets/plus.png' alt='' className='plus-icon' />
             </div>
           </div>
         </div>

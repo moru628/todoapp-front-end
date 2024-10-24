@@ -8,14 +8,16 @@ const Moment = () => {
   const [posts, setPosts] = useState([])
   const [followedFriends, setFollowedFriends] = useState([])
 
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(()=>{
     const fetchPosts = async() => {
       try{
-        const response = await axios.get('http://localhost:5050/post')
+        const response = await axios.get(`${url}/post`)
 
         const updatedPosts = response.data.map(post => ({
           ...post,
-          profileImg: post.profileImg ? `http://localhost:5050/upload/${post.profileImg}` : '/assets/profile-blank.png'
+          profileImg: post.profileImg ? `${url}/upload/${post.profileImg}` : '/assets/profile-blank.png'
         }));
         setPosts(updatedPosts)
       }catch(error){
@@ -23,14 +25,14 @@ const Moment = () => {
       }
     }
     fetchPosts()
-  }, [])
+  }, [url])
 
 useEffect(() => {
   const fetchFollowedFriends = async () => {
     const userId = localStorage.getItem('userId');
     if (!userId) return; 
     try {
-      const response = await axios.get(`http://localhost:5050/${userId}/followedFriends`);
+      const response = await axios.get(`${url}/${userId}/followedFriends`);
       setFollowedFriends(response.data.followedFriends);
     } catch (error) {
       console.error('Error fetching followed friends:', error);
@@ -38,7 +40,7 @@ useEffect(() => {
   };
 
   fetchFollowedFriends();
-}, []);
+}, [url]);
   
 useEffect(() => {
 
@@ -54,7 +56,7 @@ useEffect(() => {
   const handlePostUpload = (newPost) => {
     const updatedPost = {
       ...newPost,
-      profileImg: newPost.profileImg ? `http://localhost:5050/upload/${newPost.profileImg}` : '/assets/profile-blank.png',
+      profileImg: newPost.profileImg ? `${url}/upload/${newPost.profileImg}` : '/assets/profile-blank.png',
     };
   
     setPosts((prevPosts) => [updatedPost, ...prevPosts]);
@@ -65,7 +67,7 @@ useEffect(() => {
     const userId = localStorage.getItem('userId');
   
     try {
-      const response = await axios.post('http://localhost:5050/follow', {
+      const response = await axios.post(`${url}/follow`, {
         userId, 
         friendId
       });
@@ -85,7 +87,7 @@ useEffect(() => {
     const userId = localStorage.getItem('userId');
   
     try {
-      await axios.post('http://localhost:5050/unfollow', {
+      await axios.post(`${url}/unfollow`, {
         userId, 
         friendId
       });
@@ -115,7 +117,7 @@ useEffect(() => {
           ) : (
           followedFriends.map((friend) => (
             <div className='each-profile' key={friend._id}>
-              <img src={`http://localhost:5050/upload/${friend.profileImg}`} alt='' className='top-image' />
+              <img src={`${url}/upload/${friend.profileImg}`} alt='' className='top-image' />
               <div className='name'>{friend.name}</div>
             </div>
           ))
@@ -142,7 +144,7 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className='post-medium'>
-                  <img src={`http://localhost:5050/upload/${post.imageUrl}`} alt='' className='image'/>
+                  <img src={`${url}/upload/${post.imageUrl}`} alt='' className='image'/>
                 </div>
                 <div className='post-bottom'>
                   <div className='description'>

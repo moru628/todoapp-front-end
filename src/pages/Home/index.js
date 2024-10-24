@@ -12,8 +12,10 @@ const Home = () => {
   const [posts, setPosts] = useState([])
   const [taskCounts, setTaskCounts] = useState({});
 
-
   const userId = localStorage.getItem("userId");
+
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   const categories = [
     { id: 1, name: 'Work', tasks: taskCounts['Work'] || 0 },
     { id: 2, name: 'Study', tasks: taskCounts['Study'] || 0 },
@@ -26,14 +28,14 @@ const Home = () => {
    const fetchUserData = async () => {
      if (!userId) return; 
      try {
-       const response = await axios.get(`http://localhost:5050/user/${userId}`);
+       const response = await axios.get(`${url}/user/${userId}`);
        const userData = response.data;
  
        setUserName(userData.name);
        localStorage.setItem('userName', userData.name)
 
        if (userData.profileImg && userData.profileImg !== '') {
-        setProfileImg(`http://localhost:5050/upload/${userData.profileImg}`);
+        setProfileImg(`${url}/upload/${userData.profileImg}`);
       } else {
         setProfileImg('/assets/profile-blank.png');
       }
@@ -45,12 +47,12 @@ const Home = () => {
    };
  
    fetchUserData();
- }, [userId]);
+ }, [userId, url]);
   
  useEffect(() => {
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:5050/post');
+      const response = await axios.get(`${url}/post`);
       const posts = response.data;
 
       const selectedPosts = posts
@@ -64,18 +66,18 @@ const Home = () => {
   };
 
   fetchPosts();
-}, []);
+}, [url]);
 
 const fetchTaskCounts = useCallback(async () => {
   if (!userId) return;
   try {
-    const response = await axios.get(`http://localhost:5050/task/count?userId=${userId}`);
+    const response = await axios.get(`${url}/task/count?userId=${userId}`);
     const counts = response.data.count;
     setTaskCounts(counts);
   } catch (error) {
     console.error('Error fetching task counts:', error);
   }
-}, [userId]);
+}, [userId, url]);
 
 useEffect(() => {
   fetchTaskCounts();
@@ -83,7 +85,7 @@ useEffect(() => {
 
 const handleNewTask = async (taskData) => {
   try {
-    await axios.post('http://localhost:5050/task', taskData);
+    await axios.post(`${url}/task`, taskData);
     fetchTaskCounts();
   } catch (error) {
     console.error('Error adding task:', error);
@@ -120,13 +122,13 @@ const handleNewTask = async (taskData) => {
                 {posts.map((post) => (
                 <div key={post._id} className= 'moment-item'
                   style={{
-                  backgroundImage: `url(http://localhost:5050/upload/${post.imageUrl})`,
+                  backgroundImage: `url(${url}/upload/${post.imageUrl})`,
                 }}
                 >
                   <div className='moment-content'>
                     <div className='profile-circle'>
                     <img
-                      src={`http://localhost:5050/upload/${post.profileImg}`}
+                      src={`${url}/upload/${post.profileImg}`}
                       alt=''
                       className='profile-image'
                     />

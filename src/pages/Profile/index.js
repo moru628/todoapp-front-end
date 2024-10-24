@@ -21,6 +21,8 @@ const Profile = () => {
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
 
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     feather.replace();
     console.log('Feather replace running');
@@ -30,7 +32,7 @@ useEffect(() => {
   const fetchUserData = async () => {
     if (!userId) return; 
     try {
-      const response = await axios.get(`http://localhost:5050/user/${userId}`);
+      const response = await axios.get(`${url}/user/${userId}`);
       const userData = response.data;
 
       setUser(userData);
@@ -38,7 +40,7 @@ useEffect(() => {
       setUserName(userData.name);
 
       if (userData.profileImg && userData.profileImg !== '') {
-        setProfileImg(`http://localhost:5050/upload/${userData.profileImg}`);
+        setProfileImg(`${url}/upload/${userData.profileImg}`);
       } else {
         setProfileImg('/assets/profile-blank.png');
       }
@@ -47,11 +49,11 @@ useEffect(() => {
       localStorage.setItem('userName', userData.name)
       
       const eventImgUrls = userData.topic
-        .filter(img => img ? `http://localhost:5050${img}` : '')
+        .filter(img => img ? `${url}${img}` : '')
         .map(img => img ? img : '');
       setEventImages(eventImgUrls);
 
-      const postsResponse = await axios.get(`http://localhost:5050/post/${userId}`)
+      const postsResponse = await axios.get(`${url}/post/${userId}`)
       setPosts(postsResponse.data); 
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -59,7 +61,7 @@ useEffect(() => {
   };
 
   fetchUserData();
-}, [userId]);
+}, [userId, url]);
 
 
 useEffect(() => {
@@ -67,7 +69,7 @@ useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (!userId) return; 
     try {
-      const response = await axios.get(`http://localhost:5050/${userId}/followedFriends`);
+      const response = await axios.get(`${url}/${userId}/followedFriends`);
       setFollowedFriends(response.data.followedFriends);
     } catch (error) {
       console.error('Error fetching followed friends:', error);
@@ -75,7 +77,7 @@ useEffect(() => {
   };
 
   fetchFollowedFriends();
-}, []);
+}, [url]);
 
   const handleLogout = () => {
     localStorage.removeItem("userName");
@@ -104,7 +106,7 @@ useEffect(() => {
 
   const handleDeletePost = async (postId) => {
     try {
-    const response = await axios.delete(`http://localhost:5050/post/${postId}`);
+    const response = await axios.delete(`${url}/post/${postId}`);
     if (response.status === 200) {
       setPosts(posts.filter(post => post._id.toString() !== postId.toString()));
     }
@@ -117,6 +119,7 @@ useEffect(() => {
     <div>
       <div className='container-profile'>
         <div className='top-container' >
+          <img src='/assets/profile-background.png' alt='' className='background-image'/>
           {userName && 
             <div className='settings-icon' onClick={toggleDropdown}>
               <img src="/assets/settings.png" alt='Settings' />
@@ -228,7 +231,7 @@ useEffect(() => {
                   {posts.length > 0 ? (
                     posts.map((post, index) => (
                       <div className='post-item box' key={index}>
-                        <img src={`http://localhost:5050/upload/${post.imageUrl}`} alt={`Post ${index + 1}`} className='post-img' />
+                        <img src={`${url}/upload/${post.imageUrl}`} alt={`Post ${index + 1}`} className='post-img' />
                         <div className='post-cancel'  onClick={() => handleDeletePost(post._id)}>
                           <img src='/assets/cancel.png' alt='' className='icon'/>
                         </div>
@@ -253,7 +256,7 @@ useEffect(() => {
                   followedFriends.map((info)=>(
                     <div className='info' key={info._id}>
                       <div className='user-info'>
-                        <img src={`http://localhost:5050/upload/${info.profileImg}`} alt='' className='info-img'/>
+                        <img src={`${url}/upload/${info.profileImg}`} alt='' className='info-img'/>
                         <div className='info-name'>{info.name}</div>
                       </div>
                       <img src='/assets/envelope.png' alt='' className='envelope-icon'/>

@@ -10,6 +10,8 @@ const EventDetails = () => {
 
   const navigate = useNavigate();
 
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   const handleBackClick = () => {
         navigate('/event');
   };
@@ -21,14 +23,14 @@ const EventDetails = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5050/event/${eventId}`);
+        const response = await axios.get(`${url}/event/${eventId}`);
         setEvent(response.data);
       } catch (error) {
         console.error("Error fetching event details:", error);
       }
     };
     fetchEventDetails();
-  }, [eventId]);
+  }, [eventId, url]);
 
   return (
     <div className='event-details-container'>

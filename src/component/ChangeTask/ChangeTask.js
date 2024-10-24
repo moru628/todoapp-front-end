@@ -18,6 +18,8 @@ const ChangeTask = ({selectedCategory,handleClose,taskToEdit, onTaskUpdate}) => 
     const [selectedPriority, setSelectedPriority] = useState('Low')
     const [selectedStatus, setSelectedStatus] = useState('On track')
 
+    const url = process.env.REACT_APP_BACKEND_URL;
+
     useEffect(() => {
         if (taskToEdit) {
           setName(taskToEdit.name || '');
@@ -56,7 +58,7 @@ const ChangeTask = ({selectedCategory,handleClose,taskToEdit, onTaskUpdate}) => 
     }
     console.log("new task information", newTask)
     try{
-        const response = await axios.put(`http://localhost:5050/task/${taskToEdit._id}`,newTask)
+        const response = await axios.put(`${url}/task/${taskToEdit._id}`,newTask)
         console.log("Task updated:", response.data);
         onTaskUpdate(response.data); 
         handleClose();

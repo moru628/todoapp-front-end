@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import './activities.css'
-import vector from '../../assets/vector.png'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 const Activity = () => {
 const [activities, setActivities] = useState([])
+const url = process.env.REACT_APP_BACKEND_URL;
+
     useEffect(()=>{
         const fetchEventData = async(req, res) => {
             try{
-                const response = await axios.get('http://localhost:5050/event')
+                const response = await axios.get(`${url}/event`)
                 setActivities(response.data)
             }catch(error){
                 console.error("Error fetching activities:", error);
             }
         }
         fetchEventData()
-    }, [])
+    }, [url])
   return (
         <div className='container-scroll'>
         <div className='subtitle'>Events</div>
@@ -30,7 +31,7 @@ const [activities, setActivities] = useState([])
                 <div className='acts-title-1'>{activity.title}</div>
                 <div className='acts-title-2'>{activity.sub_title}</div>
                 <div className='location'>
-                    <img src={vector} alt='' className='location-icon'/>
+                    <img src='/assets/vector.png' alt='' className='location-icon'/>
                     <div className='location-text'>{activity.location}</div>
                 </div>
                 <div className='act-bottom'>

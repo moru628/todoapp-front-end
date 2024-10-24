@@ -11,6 +11,8 @@ const [selectedTask, setSelectedTask] = useState(null)
 const [changeIcon, setChangeIcon] = useState(false)
 const [selectedCategory, setSelectedCategory]= useState('')
 
+const url = process.env.REACT_APP_BACKEND_URL;
+
 const handleDropDown = ()=> {
   setChangeIcon(!changeIcon)
 }
@@ -27,34 +29,38 @@ const handleTaskUpdate = (updatedTask) => {
   setTasks(tasks.map(task => (task._id === updatedTask._id ? updatedTask : task)));
 };
 
-const fetchTaskData = async () => {
-  const userId = localStorage.getItem('userId');
-  if (!userId) return; 
-  try {
-    const response = await axios.get(`http://localhost:5050/task?userId=${userId}`);
-    setTasks(response.data);
+useEffect(() => {
+  const fetchTaskData = async () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return; 
+    try {
+      const response = await axios.get(`${url}/task?userId=${userId}`);
+      setTasks(response.data);
 
-    if (Array.isArray(response.data)) {
-        setTasks(response.data);
-    } else if (response.data.data) {
-        setTasks(response.data.data);
-    } else {
-        console.error("Unexpected response format:", response.data);
-        setTasks([]);
+      if (Array.isArray(response.data)) {
+          setTasks(response.data);
+      } else if (response.data.data) {
+          setTasks(response.data.data);
+      } else {
+          console.error("Unexpected response format:", response.data);
+          setTasks([]);
+      }
+
+      const user = await axios.get(`${url}/user/${userId}`);
+      setProfileImg(`${url}/upload/${user.data.profileImg}`);
+      localStorage.setItem('profileImg', user.data.profileImg);
+    } catch (error) {
+      console.error("Error fetching task data:", error);
     }
+  };
 
-    const user = await axios.get(`http://localhost:5050/user/${userId}`);
-    setProfileImg(`http://localhost:5050/upload/${user.data.profileImg}`);
-    localStorage.setItem('profileImg', user.data.profileImg);
+  fetchTaskData();
+}, [url]);
 
-  } catch (error) {
-    console.error("Error fetching task data:", error);
-  }
-};
 
 const deleteTask = async (taskId) => {
   try {
-    await axios.delete(`http://localhost:5050/task/${taskId}`);
+    await axios.delete(`${url}/task/${taskId}`);
     setTasks(tasks.filter((task) => task._id !== taskId));
   } catch (error) {
     console.error("Error deleting task:", error);
@@ -68,10 +74,6 @@ const handleCategoryClick = (category) => {
 
 const filteredTasks = selectedCategory ? tasks.filter((task)=> task.category === selectedCategory) : tasks
 
-
-useEffect(() => {
-  fetchTaskData();
-}, []);
 
 const getDayAndMonth = (dateEnd) => {
   if (!dateEnd) return { day: '', month: '' };
