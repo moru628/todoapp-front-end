@@ -1,5 +1,5 @@
 .signup-container{
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f0f0f0;
@@ -101,6 +101,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .sign-way-1{
