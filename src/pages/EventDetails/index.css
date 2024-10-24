@@ -68,7 +68,8 @@
 .confirm-btn{
    margin: 40px;
    display: flex;
-   justify-content: flex-end; 
+   justify-content: flex-end;
+   padding-bottom: 100px;
 }
 
 .confirm-btn button{
